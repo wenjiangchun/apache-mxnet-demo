@@ -1,0 +1,68 @@
+2019-27-04 17:27:00 pika.adapters.utils.connection_workflow:INFO:Pika version 1.1.0 connecting to ('47.94.225.139', 5672)
+2019-27-04 17:27:00 pika.adapters.utils.io_services_utils:INFO:Socket connected: <socket.socket fd=25, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.31.103', 42184), raddr=('47.94.225.139', 5672)>
+2019-27-04 17:27:00 pika.adapters.utils.connection_workflow:INFO:Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>).
+2019-27-04 17:27:00 pika.adapters.utils.connection_workflow:INFO:AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-27-04 17:27:00 pika.adapters.utils.connection_workflow:INFO:AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-27-04 17:27:00 pika.adapters.blocking_connection:INFO:Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-27-04 17:27:00 root:INFO:rabbitmq已连接
+2019-27-04 17:27:09 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-27-04 17:27:09 root:INFO:创建channel
+2019-27-04 17:27:09 root:INFO:创建消息处理器
+2019-27-04 17:27:09 root:INFO:客户端已连接
+2019-27-04 17:27:09 root:INFO:开始接收消息...
+2019-27-04 17:27:09 root:INFO:heooexit
+2019-27-04 17:27:28 root:INFO:客户端已断开
+2019-27-04 17:27:28 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-27-04 17:27:28 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-30-04 17:30:25 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-30-04 17:30:25 root:INFO:创建channel
+2019-30-04 17:30:25 root:INFO:创建消息处理器
+2019-30-04 17:30:25 root:INFO:客户端已连接
+2019-30-04 17:30:25 root:INFO:开始接收消息...
+2019-30-04 17:30:25 root:INFO:heooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheoexit
+2019-31-04 17:31:56 root:INFO:客户端已断开
+2019-31-04 17:31:56 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-31-04 17:31:56 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-32-04 17:32:20 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-32-04 17:32:20 root:INFO:创建channel
+2019-32-04 17:32:20 root:INFO:创建消息处理器
+2019-32-04 17:32:20 root:INFO:客户端已连接
+2019-32-04 17:32:20 root:INFO:开始接收消息...
+2019-32-04 17:32:20 root:INFO:heooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheoohexit
+2019-33-04 17:33:41 root:INFO:客户端已断开
+2019-33-04 17:33:41 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-33-04 17:33:41 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-33-04 17:33:59 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-33-04 17:33:59 root:INFO:创建channel
+2019-33-04 17:33:59 root:INFO:创建消息处理器
+2019-33-04 17:33:59 root:INFO:客户端已连接
+2019-33-04 17:33:59 root:INFO:客户端已断开
+2019-33-04 17:33:59 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-33-04 17:33:59 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-34-04 17:34:29 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-34-04 17:34:29 root:INFO:创建channel
+2019-34-04 17:34:29 root:INFO:创建消息处理器
+2019-34-04 17:34:29 root:INFO:客户端已连接
+2019-34-04 17:34:29 root:INFO:开始接收消息...
+2019-34-04 17:34:29 root:INFO:heooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheoohexit
+2019-35-04 17:35:49 root:INFO:客户端已断开
+2019-35-04 17:35:49 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-35-04 17:35:50 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-43-04 17:43:29 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-43-04 17:43:29 root:INFO:创建channel
+2019-43-04 17:43:29 root:INFO:创建消息处理器
+2019-43-04 17:43:29 root:INFO:客户端已连接
+2019-43-04 17:43:29 root:INFO:开始接收消息...
+2019-43-04 17:43:29 root:INFO:heooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheoohexit
+2019-44-04 17:44:49 root:INFO:客户端已断开
+2019-44-04 17:44:49 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-44-04 17:44:49 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-46-04 17:46:10 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-46-04 17:46:10 root:INFO:创建channel
+2019-46-04 17:46:10 root:INFO:创建消息处理器
+2019-46-04 17:46:10 root:INFO:客户端已连接
+2019-46-04 17:46:10 root:INFO:开始接收消息...
+2019-46-04 17:46:10 root:INFO:heooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheooheoohexit
+2019-47-04 17:47:30 root:INFO:客户端已断开
+2019-47-04 17:47:30 pika.channel:INFO:Closing channel (0): 'Normal shutdown' on <Channel number=1 OPEN conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
+2019-47-04 17:47:31 pika.channel:INFO:Received <Channel.CloseOk> on <Channel number=1 CLOSING conn=<SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7f9bd5912ba8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>>
