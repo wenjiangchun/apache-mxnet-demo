@@ -59,3 +59,7 @@ class VsailConfigReader(object):
 
     def get_websocket_config(self):
         pass
+
+if __name__ == '__main__':
+    config = VsailConfigReader()
+    print(config.db_database)
