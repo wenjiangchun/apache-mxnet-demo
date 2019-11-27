@@ -21,7 +21,7 @@ class VsailDataParser(object):
     #TODO 判断数据是否有效 目前只处理车辆登入，登出和车辆位置实时信息报文，其余报文暂不处理
     def is_valid(self):
         try: 
-            return self.get_data_type() != -1;
+            return self.get_data_type() != -1
         except Exception:
             return False
     
