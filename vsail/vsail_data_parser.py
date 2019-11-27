@@ -11,13 +11,19 @@ class VsailDataParser(object):
     def __init__(self, data):
         #self.dts = data.split(' ')
         self.dts = self.str_to_hex(data).split(' ')
-        if self.dts[3] != 'fe':
-            self.dts[3] = 'fe'
+        try:
+            if self.dts[3] != 'fe':
+                self.dts[3] = 'fe'
+        except Exception:
+            pass
         self.data = data
      
     #TODO 判断数据是否有效 目前只处理车辆登入，登出和车辆位置实时信息报文，其余报文暂不处理
     def is_valid(self):
-        return self.get_data_type() != -1;
+        try: 
+            return self.get_data_type() != -1;
+        except Exception:
+            return False
     
     #获取数据类型 1为登入 2为登出 3为实时车辆位置数据 -1为无效数据
     def get_data_type(self):
@@ -115,9 +121,15 @@ class VsailDataParser(object):
         return rs
 
     def str_to_hex(self, dt):
+        '''
+         将字符串转换为16进制
+        '''
         return ' '.join([hex(ord(c)).replace('0x', '').zfill(2) for c in dt])
 
     def hex_to_str(self, s):
+        '''
+         将16进制转换为字符串
+        '''
         return ''.join([chr(i) for i in [int(b, 16) for b in s.split(r'/x')[1:]]])
 
 

@@ -1,0 +1,12 @@
+2019-38-26 17:38:03 root:INFO:加载application.ini配置
+2019-38-26 17:38:03 pika.adapters.utils.connection_workflow:INFO:Pika version 1.1.0 connecting to ('47.94.225.139', 5672)
+2019-38-26 17:38:03 pika.adapters.utils.io_services_utils:INFO:Socket connected: <socket.socket fd=792, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('192.168.31.100', 11269), raddr=('47.94.225.139', 5672)>
+2019-38-26 17:38:03 pika.adapters.utils.connection_workflow:INFO:Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x00000245BB3AB5C8>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x00000245BB3AB5C8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>).
+2019-38-26 17:38:03 pika.adapters.utils.connection_workflow:INFO:AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x00000245BB3AB5C8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-38-26 17:38:03 pika.adapters.utils.connection_workflow:INFO:AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x00000245BB3AB5C8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-38-26 17:38:03 pika.adapters.blocking_connection:INFO:Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x00000245BB3AB5C8> params=<ConnectionParameters host=47.94.225.139 port=5672 virtual_host=/ ssl=False>>
+2019-38-26 17:38:03 root:INFO:rabbitmq已连接
+2019-38-26 17:38:03 root:INFO:postgresql已连接
+2019-38-26 17:38:03 root:INFO:db-client init success
+2019-38-26 17:38:03 pika.adapters.blocking_connection:INFO:Created channel=1
+2019-38-26 17:38:03 root:INFO:开始监听mq消息队列...

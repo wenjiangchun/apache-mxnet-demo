@@ -63,9 +63,7 @@ class VsailDataHandler(basic.NetstringReceiver):
         logging.info('开始接收消息...')
         message = data.decode('utf-8',"ignore")
         logging.info(message)
-        print('收到消息。。。')
-        for i in range(200000):
-            self.channel.basic_publish(exchange=self.reader.rq_ex_real, routing_key='', body=message)
+        self.channel.basic_publish(exchange=self.reader.rq_ex_real, routing_key='', body=message)
         if message == 'exit':
             self.transport.loseConnection()
         else:
@@ -77,23 +75,22 @@ class VsailDataHandler(basic.NetstringReceiver):
                 if parser.is_valid():
                     #判断是历史消息还是实时消息
                     if parser.is_real() is True:
-                        print('开始发送。。。')
-                        self.channel.basic_publish(exchange=self.reader.rq_ex_real, routing_key='', body=str(bus_data))
+                        #self.channel.basic_publish(exchange=self.reader.rq_ex_real, routing_key='', body=str(bus_data))
                         #如果是上线或下线 返回结果指令信息
                         if bus_data['type'] == 1 or bus_data['type'] == 2:
-                            self.transport.write('OK'.encode('utf-8'))
+                            #self.transport.write('OK'.encode('utf-8'))
+                            pass
                     else:
-                        self.channel.basic_publish(exchange=self.reader.rq_ex_hist, routing_key='', body=str(bus_data))
+                        #self.channel.basic_publish(exchange=self.reader.rq_ex_hist, routing_key='', body=str(bus_data))
+                        pass
                 else:
                     logging.warning('无效报文:' + message)
                     #self.transport.write('OKK'.encode('utf-8'))
             except Exception as ex:
                 pass
     def connectionMade(self):  # 建立连接后的回调函数
-        #logging.info('客户端已连接')
         logging.info('客户端已连接')
     def connectionLost(self, reason=connectionDone):  # 断开连接后的反应
-        #logging.info('客户端已断开')
         logging.info('客户端已断开')
         self.channel.close()
         
