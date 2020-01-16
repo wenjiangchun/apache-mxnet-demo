@@ -6,7 +6,7 @@ import pika
 import socketserver
 import socket
 import pandas as pd
-
+import codecs
 
 # %%
 logging.basicConfig(filename="rabbitmq-receiver.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%Y-%M-%d %H:%M:%S", level=logging.INFO)
@@ -17,7 +17,7 @@ logging.basicConfig(filename="rabbitmq-receiver.log", filemode="w", format="%(as
 sokt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sokt.connect(('47.94.225.139',9999)) 
 
-
+#sokt.connect(('localhost',9999)) 
 # %%
 #user = 'admin#admin'
 #sokt.send(user.encode('utf-8')) #发消息
@@ -36,8 +36,14 @@ for data in data_frame.data:
    #data_list.append(data)
 data_list.reverse()
 print(len(data_list))
-for i in range(1):
-    sokt.send(msg1) #发消息
+def str_to_hex(dt):
+        '''
+         将字符串转换为16进制
+        '''
+        return ' '.join([hex(ord(c)).replace('0x', '').zfill(2) for c in dt])
+
+for i in data_list:
+    sokt.send(i.encode('utf-8')) #发消息
         #time.sleep(1)
         #back_msg = sokt.recv(1024)
         #print(back_msg.decode('utf-8'))

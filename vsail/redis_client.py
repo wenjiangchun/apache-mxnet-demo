@@ -15,7 +15,7 @@ import binascii
 #       1 初始化从数据库中加载车辆基本信息和位置信息到缓存
 #       2 从rabbitMQ中监听队列，消费报文消息，同时将获取的报文解析后发送至平台
 
-logging.basicConfig(filename="redis-client.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%Y-%M-%d %H:%M:%S", level=logging.INFO)
+logging.basicConfig(filename="redis_client.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%y-%m-%d %H:%M:%S", level=logging.INFO)
 class RedisClient(object):
     def __init__(self):
         self.reader = VsailConfigReader()
@@ -25,9 +25,9 @@ class RedisClient(object):
         self.rq_conn = self.init_rabbitMq()
         #获取DB连接
         db_conn, db_curs = self.init_db()
-        logging.info('get bus info from postgresql') 
+        logging.info('从DB中加载车辆信息...') 
         try:
-            query_bus_sql = 'select b.id, b.create_time, b.vin, b.bus_num, b.driving_num, b.engine_num, b.motor_name, b.motor_num, b.regist_num, g.full_name, r.full_name as root_full_name, g.id, r.id from v_bus b left join sys_group g on b.group_id=g.id left join sys_group r on b.root_group_id=r.id where b.deleted=false'
+            query_bus_sql = 'select b.id, b.create_time, b.vin, COALESCE(b.bus_num,\'\'), COALESCE(b.driving_num,\'\'), b.model_name, COALESCE(b.product_num,\'\'), b.line_group_id, b.site_group_id, b.branch_group_id, b.root_group_id, l.full_name, s.full_name as site_full_name, COALESCE(s.linker,\'\'), COALESCE(s.linker_mobile,\'\'), COALESCE(s.address,\'\'), br.full_name as branch_full_name, r.full_name as root_full_name from v_bus b left join sys_group l on b.line_group_id=l.id left join sys_group s on b.site_group_id=s.id left join sys_group br on b.branch_group_id=br.id left join sys_group r on b.root_group_id=r.id where b.deleted=false and b.used=true'
             db_curs.execute(query_bus_sql)
             dataes = db_curs.fetchall()
             for d in dataes:
@@ -38,36 +38,44 @@ class RedisClient(object):
                 bus['create_time'] = str(d[1])
                 bus['busNum'] = d[3]
                 bus['drivingNum'] = d[4]
-                bus['engineNum'] = d[5]
-                bus['motorNum'] = d[6]
-                bus['motorNum'] = d[7]
-                bus['registNum'] = d[8]
-                bus['groupName'] = d[9]
-                bus['rootGroupName'] = d[10]
-                bus['groupId'] = d[11]
-                bus['rootGroupId'] = d[12]
+                bus['modelName'] = d[5]
+                bus['productNum'] = d[6]
+                bus['lineGroupId'] = d[7]
+                bus['siteGroupId'] = d[8]
+                bus['branchGroupId'] = d[9]
+                bus['rootGroupId'] = d[10]
+                bus['lineGroupName'] = d[11]
+                bus['siteGroupName'] = d[12]
+                bus['linker'] = d[13]
+                bus['linkerMobile'] = d[14]
+                bus['address'] = d[15]
+                bus['branchGroupName'] = d[16]
+                bus['rootGroupName'] = d[17]
                 bus['eventCode'] = '4'
                 bus_key = 'bus_' + vin
                 for key, value in bus.items():
                     self.rs_conn.hset(name= bus_key, key= key, value= value)
             logging.info('从DB中加载车辆基本信息已成功')
         except Exception as ex:
-            logging.exception('初始化缓存出错') 
+            logging.exception('初始化缓存出错')
+            logging.exception(ex)
             raise ex
         finally:
             db_curs.close()
             db_conn.close()
-        logging.info('redis初始化成功') 
+        logging.info('redis_client初始化成功!') 
     
     def init_redis(self):
         try:
             pool = redis.ConnectionPool(host=self.reader.redis_host,max_connections=1000)
             rs_client = redis.Redis(connection_pool=pool)
+            logging.info('redis已连接!')
             rs_client.flushdb()
-            logging.info('redis已连接')
+            logging.info('redis已连接!')
             return rs_client
         except Exception as ex:
             logging.exception('redis初始化错误')
+            logging.exception(ex)
             raise ex
             
     def init_db(self):
@@ -83,34 +91,41 @@ class RedisClient(object):
     def init_rabbitMq(self):
         #初始化rabbitmq连接
         try:
-            parameters = pika.ConnectionParameters(self.reader.rq_host, credentials=pika.credentials.PlainCredentials(self.reader.rq_user,self.reader.rq_passd), heartbeat=0)
+            parameters = pika.ConnectionParameters(self.reader.rq_host, port=self.reader.rq_port, credentials=pika.credentials.PlainCredentials(self.reader.rq_user,self.reader.rq_passd), heartbeat=5)
             rq_connection = pika.BlockingConnection(parameters)
             logging.info('rabbitmq已连接')
             return rq_connection
         except Exception as ex:
-            logging.exception('rabbitmq初始化错误') 
+            logging.exception('rabbitmq初始化错误')
             raise ex
     
     def on_message(self, channel, method_frame, header_frame, body):
-        #res.set(str(method_frame.delivery_tag), str(method_frame.delivery_tag))
         channel.basic_ack(delivery_tag=method_frame.delivery_tag)
         try:
             bus_data = str(body, encoding = "utf-8")
             parser = VsailDataParser(bus_data)
-            d = parser.translate_to_json()
-            print(d)
-            vin = d['vin']
-            #self.rs_conn.hmset('bus_' + vin, d)
-            bus_key = 'bus_' + vin
-            for key, value in d.items():
-                self.rs_conn.hset(name= bus_key, key= key, value= str(value))
-            channel.basic_ack(delivery_tag=method_frame.delivery_tag)
-            try:
-                rest_url = self.reader.websocket_url + bus_key
-                req.post(rest_url)
-            except Exception as ex:
-                logging.exception('rest服务发送失败') 
+            if parser.is_valid():
+                d = parser.translate_to_json()
+                vin = d['vin']
+                if parser.get_data_type() == 1:
+                    d['eventCode'] = '1'
+                elif parser.get_data_type() == 2:
+                    d['eventCode'] = '2'
+                else:
+                    d['eventCode'] = '3'
+                    d['sensores'] = str(d['sensores'])
+                bus_key = 'bus_' + vin
+                self.rs_conn.hmset(bus_key, d)
+                #for key, value in d.items():
+                    #self.rs_conn.hset(name=bus_key, key=key, value=str(value))
+                    #pass
+                try:
+                    rest_url = self.reader.websocket_url + vin
+                    req.post(rest_url)
+                except Exception:
+                    logging.exception('rest服务发送失败') 
         except Exception as ex:
+            logging.exception(ex)
             logging.exception('消息处理失败,忽略') 
             #raise ex
         
@@ -121,9 +136,11 @@ class RedisClient(object):
             logging.info('开始监听mq消息队列...')  
             channel.start_consuming()
         except Exception as ex:
-            channel.stop_consuming()
             logging.exception('mq任务监听失败') 
+            logging.exception(ex)
+            channel.stop_consuming()
         finally:
+            logging.exception('关闭连接...') 
             self.rq_conn.close()
             self.rs_conn.close()
             

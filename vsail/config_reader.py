@@ -12,6 +12,7 @@ class VsailConfigReader(object):
         #----------------------rabbitmq配置信息--------------------------
         #服务器地址
         self.rq_host = parser.get('rabbitmq', 'host')
+        self.rq_port = parser.get('rabbitmq', 'port')
         #实时消息使用exchange名称
         self.rq_ex_real = parser.get('rabbitmq', 'ex_real')
         #历史消息使用exchange名称
